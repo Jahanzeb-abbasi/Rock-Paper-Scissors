@@ -6,11 +6,11 @@ function playRound(playerSelection, computerSelection) {
     if (playerSelection === computerSelection) {
         return "It's a draw!"
     }
-    else if(playerSelection === 'Rock' && computerSelection === 'Scissor') {
+    else if(playerSelection === 'Rock' && computerSelection === 'Scissors') {
         playerScore++;
         return `You Win! ${playerSelection} beats ${computerSelection}`
     }
-    else if (playerSelection === 'Scissor' && computerSelection === 'Paper') {
+    else if (playerSelection === 'Scissors' && computerSelection === 'Paper') {
         playerScore++;
         return `You Win! ${playerSelection} beats ${computerSelection}`
     }
@@ -22,26 +22,19 @@ function playRound(playerSelection, computerSelection) {
         computerScore++;
         return `You Lose! ${computerSelection} beats ${playerSelection}`
     }
-    else if(playerSelection === 'Scissor' && computerSelection === 'Rock') {
+    else if(playerSelection === 'Scissors' && computerSelection === 'Rock') {
         computerScore++;
         return `You Lose! ${computerSelection} beats ${playerSelection}`
     }
-    else if(playerSelection === 'Paper' && computerSelection === 'Scissor') {
+    else if(playerSelection === 'Paper' && computerSelection === 'Scissors') {
         computerScore++;
         return `You Lose! ${computerSelection} beats ${playerSelection}`
     }
-}
-
-// Get Player Choice 
-function getPlayerChoice() {
-    let playerSelection = prompt("Enter Rock, Paper or Scissor").toLowerCase();
-    playerSelection = playerSelection.charAt(0).toUpperCase() + playerSelection.slice(1)
-    return playerSelection;
 }
 
 // Get Computer Choice 
 function getComputerChoice() {
-    const moves = ['Rock','Paper','Scissor'];
+    const moves = ['Rock','Paper','Scissors'];
     let chosenMove = moves[Math.floor(Math.random()*3)]
     return chosenMove;
 }
@@ -59,24 +52,34 @@ function gameWinner() {
     }
 }
 
-function game() {
-    
-    // 5 Round Game 
-    for (i = 0; i < 5; i++) {
-
-        let playerSelection = getPlayerChoice();
+const btns = document.querySelectorAll('.gamebtn')
+btns.forEach(btn => {
+    btn.addEventListener('click', () => {
+        let playerSelection = btn.textContent
         let computerSelection = getComputerChoice();
+        const scoreDiv = document.querySelector('.score')
+        scoreDiv.textContent = playRound(playerSelection,computerSelection)
+    })
+})
 
-        // Round Status 
-        console.log(`Round ${i+1}`)
-        console.log(`Player Choice: ${playerSelection}`)
-        console.log(`Computer Choice: ${computerSelection}`)
-        console.log(playRound(playerSelection,computerSelection))
-        console.log(`Player Score: ${playerScore} | Computer Score: ${computerScore}`)
-    }
-    // Outputs the Final Result 
-    console.log(`Final Score: Player - ${playerScore} | Computer - ${computerScore}`)
-    console.log(gameWinner());
-}
+// function game() {
+    
+//     // 5 Round Game 
+//     // for (i = 0; i < 5; i++) {
 
-game();
+//         let playerSelection = getPlayerChoice();
+//         let computerSelection = getComputerChoice();
+
+//         // Round Status 
+//         // console.log(`Round ${i+1}`)
+//         console.log(`Player Choice: ${playerSelection}`)
+//         console.log(`Computer Choice: ${computerSelection}`)
+//         console.log(playRound(playerSelection,computerSelection))
+//         console.log(`Player Score: ${playerScore} | Computer Score: ${computerScore}`)
+//     // }
+//     // Outputs the Final Result 
+//     console.log(`Final Score: Player - ${playerScore} | Computer - ${computerScore}`)
+//     console.log(gameWinner());
+// }
+
+// game();
